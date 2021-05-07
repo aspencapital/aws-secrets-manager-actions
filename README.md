@@ -18,7 +18,7 @@ steps:
      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
      AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
      SECRET_NAME: ${{ secrets.SECRET_NAME }}
-     OUTPUT_PATH: '.env' # optional
+     SECRET_PREFIX: #optional
 ```
 
 Add your AWS IAM keys and you secret name that you want to use from your AWS Secrets Manager secrets list.
@@ -26,7 +26,7 @@ Then your secrets will be defined environment values.
 
 ### AWS IAM
 
-You need [AWS IAM](https://aws.amazon.com/iam) user that has proper policy to access AWS Secrets Manager. 
+You need [AWS IAM](https://aws.amazon.com/iam) user that has proper policy to access AWS Secrets Manager.
 If you have it, then add this IAM user keys at `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and region `AWS_DEFAULT_REGION`.
 But we greatly recommend to store these keys at [GitHub Secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets).
 
@@ -63,13 +63,12 @@ And these environment values are masked with `***`. So never be revealed.
 
 Most of the secrets are can be parsed.
 But some case, parsing can be failed, like invalid json.
-In this case, this unparsed raw sting will be stored in `asm_secret` env key.  
+In this case, this unparsed raw sting will be stored in `asm_secret` env key.
 
-### Export environment variables to file
+### Variable prefix
 
-You can export these environment variables to file with `OUTPUT_PATH` input parameter.
-When you define `OUTPUT_PATH`, then action create a file named as you defined.
-And environments will be exported into this file.   
+You can prefix these environment variables names with the `SECRET_PREFIX` input parameter.
+When you define `SECRET_PREFIX`, then action will prefix all env var names with this value.
 
 ## Contributing
 
